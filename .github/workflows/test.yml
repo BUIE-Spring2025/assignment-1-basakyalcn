@@ -1,0 +1,18 @@
+name: Python Tests
+
+on: [push, pull_request]  
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  
+    steps:
+      - name: Reposu Klonla
+        uses: actions/checkout@v3
+
+      - name: Python'u Kur
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"  
+
+      - name: Testleri Çalıştır
+        run: python main_test.py main_test2.py main_test3.py maint_test4.py main_test5.py  
