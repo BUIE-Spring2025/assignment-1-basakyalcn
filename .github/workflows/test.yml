@@ -1,18 +1,30 @@
-name: Python Tests
+name: Run Pytest
 
-on: [push, pull_request]  
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
-    runs-on: ubuntu-latest  
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Reposu Klonla
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Python'u Kur
+      - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: "3.x"  
+          python-version: '3.x'  
 
-      - name: Testleri Çalıştır
-        run: python main_test.py main_test2.py main_test3.py maint_test4.py main_test5.py  
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+
+      - name: Run Tests
+        run: pytest
